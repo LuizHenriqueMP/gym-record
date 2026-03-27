@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Workout {
+  id Int @id @default(autoincrement())
+  name String
+  day String
+  exercise Exercise[]
+  done_workouts DoneWorkout[]
+}
+
+model Exercise{
+  id Int @id @default(autoincrement())
+  name String
+  sets Int
+  rep_min Int
+  rep_max Int
+  workout Workout @relation(fields: [id_workout], references: [id], onDelete: Cascade )
+  id_workout Int
+  done_exercise DoneExercise[]
+}
+
+model DoneWorkout{
+  id Int @id @default(autoincrement())
+  done_exercises DoneExercise[]
+  workout Workout @relation(fields: [id_workout], references: [id], onDelete: Cascade)
+  id_workout Int
+}
+
+model DoneExercise{
+  id Int @id @default(autoincrement())
+  name String
+  exercice Exercise @relation(fields: [id_exercise], references: [id], onDelete: Cascade)
+  id_exercise Int
+  done_workout DoneWorkout @relation(fields: [id_done_workout], references: [id], onDelete: Cascade)
+  id_done_workout Int
+  sets Set[]
+}
+
+model Set{
+  id Int @id @default(autoincrement())
+  reps Int
+  weight Int
+  done_exercise DoneExercise @relation(fields: [id_done_exercise], references: [id], onDelete: Cascade)
+  id_done_exercise Int
+}
