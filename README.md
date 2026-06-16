@@ -1,6 +1,9 @@
 # Gym Record (gym-record)
 
-A gym record for weights and exercices
+<p>Gym Record is an web application to record your workouts and exercises, tracking your progress and making your life in the gym more easy.</p>
+<p>This idea came from a job application where i needed to use Javascript with Quasar, Vue and Prisma to make an project. Then i wanted to do something that i could use in my routine.</p>
+<p>Then i created Gym Record, which uses all that frameworks!</p>
+<hr>
 
 ## Install the dependencies
 
